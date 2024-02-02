@@ -1,0 +1,5 @@
+Moneda
+Dolar 
+Euro 
+Dolar canadiense 
+Libra 
