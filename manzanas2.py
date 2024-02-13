@@ -1,0 +1,7 @@
+print("Hola buenas tardes")
+cantManzana = float(input ("Cuantas manzanas va a llevar: "))
+print(cantManzana)
+precioManzana = float(input("Precio de las manzanas: "))
+print(precioManzana)
+print("Total es de: ")
+print(precioManzana * cantManzana) 
