@@ -4,7 +4,7 @@ table = range(numero1, numero2)
 for numero in table:
     if numero %2 == 0 :
         print(f"Este numero es par {numero}")
-    else: 
+    else:            
         print(f"Este numero es impar {numero}")
 
 nombre = "Andy"
