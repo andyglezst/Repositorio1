@@ -1,0 +1,82 @@
+import mysql.connector
+import usuarioModel
+from utils import connector
+
+def extraerUsuarios():
+    conexion = connector.dbConnection()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT * FROM usuario")
+    usuarios = []
+    resultados = cursor.fetchall()
+    for fila in resultados:
+        usuario = usuarioModel.asignarDatos(fila)
+        usuarios.append(usuario)
+    return usuarios
+
+def extraerUsuario(codigo):
+    conexion = connector.dbConnection()
+    cursor = conexion.cursor()
+    cursor.execute(f"SElECT * FROM usuario WHERE id_usuario = {codigo}")
+    usuarios = []
+    resultados = cursor.fetchone()
+    usuario = usuarioModel.asignarDatos(resultados)
+    cursor.close()
+    conexion.close()
+    return usuario
+
+def borrarUsuario(codigo):
+    conexion = connector.dbConnection()
+    cursor = conexion.cursor()
+    cursor.execute(f"DELETE FROM usuario WHERE id_usuario = {codigo}")
+    print(cursor.rowcount)
+    conexion.commit()
+    cursor.close()
+    conexion.close()
+
+def agregarUsuario(usuario):
+    conexion = connector.dbConnection()
+    cursor = conexion.cursor()
+    cursor.execute(f"INSERT INTO `mercadocucea`.`usuario` (`usuario`, `contrasenia`, `correo`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `puesto`, `telefono`) VALUES ('{usuario['usuario']}','', '{usuario['correo']}', '{usuario['nombre']}', '{usuario['apellidoPaterno']}', '{usuario['apellidoMaterno']}', '{usuario['puesto']}', '{usuario['telefono']}');")
+    print(cursor.rowcount)
+    conexion.commit()
+    cursor.close()
+    conexion.close()
+
+usuarioAgregar = usuarioModel.usuario
+usuarioAgregar['usuario']='test'
+usuarioAgregar['correo']='test'
+usuarioAgregar['nombre']='test'
+usuarioAgregar['apellidoPaterno']='test'
+usuarioAgregar['apellidoMaterno']='test'
+usuarioAgregar['puesto']='test'
+usuarioAgregar['telefono']='test'
+
+agregarUsuario(usuarioAgregar)
+
+def main():
+    while True:
+        print("\nMenú:")
+        print("1. Extraer usuarios")
+        print("2. Extraer usuario con el codigo:")
+        print("3. Agregar usuario")
+        print("4. Eliminar usuario")
+        print("5. Salir")
+        
+        opcion = input("Seleccione una opción: ")
+        
+        if opcion == "1":
+            extraerUsuarios()
+        elif opcion == "2":
+            extraerUsuario()
+        elif opcion == "3":
+            borrarUsuario()
+        elif opcion == "4":
+            agregarUsuario()
+        elif opcion == "5":
+            print("Saliendo...")
+            break
+        else:
+            print("Opción no válida. Por favor, seleccione una opción válida.")
+
+if __name__ == "__main__":
+    main()

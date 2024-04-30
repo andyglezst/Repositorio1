@@ -1,20 +1,12 @@
 descuento = 0
 total = 0
-cantidadManzana = 1
+
 
 print("Hola buenas tardes")
-
+cantidadManzana = float(input('Dime la cantidad de manzanas vendidas: '))
 while cantidadManzana != 0:
-    # PARTE 1
-    # PEDIR DATOS
-    cantidadManzana = float(input('Dime la cantidad de manzanas vendidas: '))
-    if cantidadManzana == 0:
-        break
     precioManzana = float(input('Dime el precio de la manzana: '))
-    
     total = cantidadManzana * precioManzana
-    # PARTE 2
-    # CALCULAR DESCUENTO
     if cantidadManzana ==30 :
         print("Descuento especial")
         descuento = (cantidadManzana * precioManzana)*.2
@@ -27,8 +19,5 @@ while cantidadManzana != 0:
         total = total - descuento
     else :
         print("Gracias por pagar el precio completo")
-    # PARTE 3
-    # MOSTRAR RESULTADOS
     print(f"Total: {total}" )
-
-
+    cantidadManzana = float(input('Dime la cantidad de manzanas vendidas: '))
